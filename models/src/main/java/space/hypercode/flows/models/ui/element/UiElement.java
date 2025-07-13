@@ -25,5 +25,5 @@ import lombok.Setter;
 })
 public abstract class UiElement {
     private ElementType type;
-    private String name;
+    private String id;
 }

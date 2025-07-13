@@ -1,4 +1,4 @@
-package space.hypercode.flows.models.ui.element;
+package space.hypercode.flows.models.ui.components;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Builder;
@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @NoArgsConstructor
-@JsonTypeName("EVALUATION")
-public class EvaluationElement extends UiElement {
+@JsonTypeName("OUTPUT")
+public class OutputUiComponent extends UiComponent {
+    // Output specific UI component configuration
 }

@@ -18,7 +18,7 @@ class UiElementJsonTest {
                 .multiSelect(true)
                 .build();
         element.setType(ElementType.DROPDOWN);
-        element.setName("Select Options");
+        element.setId("Select Options");
 
         String json = objectMapper.writeValueAsString(element);
         
@@ -34,7 +34,7 @@ class UiElementJsonTest {
                 .maxLength(50)
                 .build();
         element.setType(ElementType.TEXTBOX);
-        element.setName("Input Field");
+        element.setId("Input Field");
 
         String json = objectMapper.writeValueAsString(element);
         
@@ -48,26 +48,24 @@ class UiElementJsonTest {
         TrueFalseElement element = TrueFalseElement.builder()
                 .build();
         element.setType(ElementType.TRUE_FALSE);
-        element.setName("Yes/No Question");
+        element.setId("Yes/No Question");
 
         String json = objectMapper.writeValueAsString(element);
         
         assertTrue(json.contains("\"type\":\"TRUE_FALSE\""));
-        assertTrue(json.contains("\"name\":\"Yes/No Question\"")); 
+        assertTrue(json.contains("\"id\":\"Yes/No Question\"")); 
     }
 
     @Test
     void testEvaluationElementSerialization() throws Exception {
         EvaluationElement element = EvaluationElement.builder()
-                .json("{\"expression\": \"x > 5\"}")
                 .build();
         element.setType(ElementType.EVALUATION);
-        element.setName("Expression Evaluator");
+        element.setId("Expression Evaluator");
 
         String json = objectMapper.writeValueAsString(element);
         
         assertTrue(json.contains("\"type\":\"EVALUATION\""));
-        assertTrue(json.contains("\"json\":\"{\\\"expression\\\": \\\"x > 5\\\"}\""));
     }
 
     @Test
@@ -75,7 +73,7 @@ class UiElementJsonTest {
         String dropdownJson = """
                 {
                     "type": "DROPDOWN",
-                    "name": "Select Country",
+                    "id": "Select Country",
                     "options": ["USA", "Canada", "Mexico"],
                     "multiSelect": false
                 }
@@ -85,7 +83,7 @@ class UiElementJsonTest {
         
         assertInstanceOf(DropDownElement.class, element);
         assertEquals(ElementType.DROPDOWN, element.getType());
-        assertEquals("Select Country", element.getName());
+        assertEquals("Select Country", element.getId());
         
         DropDownElement dropdown = (DropDownElement) element;
         assertEquals(3, dropdown.getOptions().size());
@@ -97,7 +95,7 @@ class UiElementJsonTest {
         String textboxJson = """
                 {
                     "type": "TEXTBOX",
-                    "name": "Email Input",
+                    "id": "Email Input",
                     "regex": "^[\\\\w.-]+@[\\\\w.-]+\\\\.[a-zA-Z]{2,}$",
                     "maxLength": 100
                 }
@@ -118,8 +116,7 @@ class UiElementJsonTest {
         String evaluationJson = """
                 {
                     "type": "EVALUATION",
-                    "name": "Math Expression",
-                    "json": "{\\"formula\\": \\"a + b * c\\"}"
+                    "id": "Math Expression"
                 }
                 """;
 
@@ -129,6 +126,5 @@ class UiElementJsonTest {
         assertEquals(ElementType.EVALUATION, element.getType());
         
         EvaluationElement evaluation = (EvaluationElement) element;
-        assertEquals("{\"formula\": \"a + b * c\"}", evaluation.getJson());
     }
 }

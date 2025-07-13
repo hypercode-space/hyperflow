@@ -12,7 +12,7 @@ class DebugJsonTest {
         // Create and serialize
         DropDownElement element = new DropDownElement();
         element.setType(ElementType.DROPDOWN);
-        element.setName("Test Dropdown");
+        element.setId("Test Dropdown");
         
         String json = objectMapper.writeValueAsString(element);
         System.out.println("Serialized JSON: " + json);
@@ -20,7 +20,7 @@ class DebugJsonTest {
         // Deserialize
         UiElement deserialized = objectMapper.readValue(json, UiElement.class);
         System.out.println("Deserialized type: " + deserialized.getType());
-        System.out.println("Deserialized name: " + deserialized.getName());
+        System.out.println("Deserialized name: " + deserialized.getId());
         System.out.println("Class: " + deserialized.getClass().getSimpleName());
     }
 }
